@@ -15,27 +15,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, reactive, toRefs } from "vue";
 import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 
-export default defineComponent({
+interface dataProps {
+  nameArray: string[];
+  selectHero: string;
+  selectHroFun: (index: number) => void;
+}
+
+export default {
   name: "Home",
   setup() {
-    const nameArray = ref(["飞人", "蝙蝠侠", "蜘蛛侠"]);
-    const selectHero = ref("");
-    const selectHroFun = (inde: number) => {
-      selectHero.value = nameArray.value[inde];
-      console.log(selectHero);
-    };
+    const data: dataProps = reactive({
+      nameArray: ["飞人", "蝙蝠侠", "蜘蛛侠"],
+      selectHero: "",
+      selectHroFun: (inde: number) => {
+        data.selectHero = data.nameArray[inde];
+      },
+    });
+
+    const refsData = toRefs(data);
 
     return {
-      nameArray,
-      selectHroFun,
-      selectHero,
+      ...refsData,
     };
   },
   components: {
     HelloWorld,
   },
-});
+};
 </script>
