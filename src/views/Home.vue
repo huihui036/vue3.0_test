@@ -15,10 +15,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, toRefs } from "vue";
+import { reactive, toRefs } from "vue";
 import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 
-interface dataProps {
+interface DataProps {
   nameArray: string[];
   selectHero: string;
   selectHroFun: (index: number) => void;
@@ -27,7 +27,7 @@ interface dataProps {
 export default {
   name: "Home",
   setup() {
-    const data: dataProps = reactive({
+    const data: DataProps = reactive({
       nameArray: ["飞人", "蝙蝠侠", "蜘蛛侠"],
       selectHero: "",
       selectHroFun: (inde: number) => {
@@ -41,6 +41,7 @@ export default {
       ...refsData,
     };
   },
+
   components: {
     HelloWorld,
   },
